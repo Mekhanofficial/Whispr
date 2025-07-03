@@ -22,7 +22,7 @@ export default function PoemEditor({ onPoemSubmit }: PoemEditorProps) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("Anonymous");
-  const [category, setCategory] = useState("love"); // Default category
+  const [category, setCategory] = useState("love");
   const [showAIAssistant, setShowAIAssistant] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -41,7 +41,7 @@ export default function PoemEditor({ onPoemSubmit }: PoemEditorProps) {
     setTitle("");
     setBody("");
     setAuthor("Anonymous");
-    setCategory("love"); // Reset to default
+    setCategory("love");
   };
 
   const handleAIGeneratedText = (generatedText: string) => {
@@ -50,10 +50,10 @@ export default function PoemEditor({ onPoemSubmit }: PoemEditorProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="space-y-6 max-w-full">
+      <form onSubmit={handleSubmit} className="space-y-4 max-w-full">
         <input
-          className="w-full p-3 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+          className="w-full p-3 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 break-words"
           placeholder="Poem title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -61,7 +61,7 @@ export default function PoemEditor({ onPoemSubmit }: PoemEditorProps) {
         />
 
         <textarea
-          className="w-full p-3 h-60 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+          className="w-full p-3 h-60 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 break-words resize-none"
           placeholder="Write your poem here..."
           value={body}
           onChange={(e) => setBody(e.target.value)}
@@ -69,17 +69,17 @@ export default function PoemEditor({ onPoemSubmit }: PoemEditorProps) {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm text-slate-400 mb-1">Author</label>
             <input
-              className="w-full p-3 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full p-3 rounded-lg bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 break-words"
               placeholder="Your name (optional)"
               value={author}
               onChange={(e) => setAuthor(e.target.value || "Anonymous")}
             />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm text-slate-400 mb-1">
               Category
             </label>
