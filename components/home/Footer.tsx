@@ -84,10 +84,11 @@ export default function Footer({ categories, setActiveCategory }: FooterProps) {
               Discover Secrets
             </h4>
             <p className="text-slate-400 text-sm mb-4">
-              Tap the word "Unlock" in any poem{" "}
+              Tap the word &quot;Unlock&quot; in any poem{" "}
               {getVaultSettings()?.tapCount || 3} times to discover hidden
               features
             </p>
+
             <p className="text-slate-500 text-sm">
               &copy; {new Date().getFullYear()} Whispr. All rights reserved.
             </p>

@@ -131,8 +131,9 @@ export default function SearchPage() {
           ) : (
             <div className="text-center py-12">
               <p className="text-slate-400 mb-4">
-                No poems found matching "{searchTerm}"
+                No poems found matching &quot;{searchTerm}&quot;
               </p>
+
               <Link
                 href="/write"
                 className="inline-block bg-teal-600 px-6 py-2 rounded-lg hover:bg-teal-500 transition-colors"

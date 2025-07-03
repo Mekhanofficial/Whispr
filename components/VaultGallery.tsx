@@ -243,7 +243,8 @@ export default function VaultGallery() {
           )}
 
           <p className="text-center text-sm text-slate-500">
-            Tap "{settings.secretWord}" {settings.tapCount} times to unlock
+            Tap &quot;{settings.secretWord}&quot; {settings.tapCount} times to
+            unlock
           </p>
 
           {tapCount > 0 && (
