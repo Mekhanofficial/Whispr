@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { getVaultSettings } from "@/lib/vault";
 import VaultNotes from "./VaultNotes";
 import AppLauncher from "./AppLauncher";
+import Image from "next/image";
 
 type MediaItem = {
   id: string;
@@ -290,9 +291,11 @@ export default function VaultGallery() {
               className="max-h-full max-w-full"
             />
           ) : (
-            <img
+            <Image
               src={selectedMedia.url}
               alt={selectedMedia.name}
+              width={800}
+              height={600}
               className="max-h-full max-w-full object-contain"
             />
           )}
@@ -393,9 +396,11 @@ export default function VaultGallery() {
                           className="w-full h-full object-cover aspect-square rounded-lg"
                         />
                       ) : (
-                        <img
+                        <Image
                           src={item.url}
                           alt=""
+                          width={300}
+                          height={300}
                           className="w-full h-full object-cover aspect-square rounded-lg"
                         />
                       )}

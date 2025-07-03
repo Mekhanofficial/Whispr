@@ -8,6 +8,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export default function Navbar() {
   const { isVaultUnlocked, lockVault } = useVaultSession();
 
+  const handleLockClick = () => {
+    lockVault();
+  };
+
   return (
     <nav className="flex justify-between items-center px-6 py-4 shadow-sm border-b border-slate-800 bg-slate-900">
       <Link
@@ -35,7 +39,7 @@ export default function Navbar() {
 
         {isVaultUnlocked && (
           <button
-            onClick={lockVault}
+            onClick={handleLockClick}
             className="ml-2 px-3 py-1 text-xs bg-red-600 rounded hover:bg-red-500 transition-colors"
           >
             Lock
@@ -45,4 +49,3 @@ export default function Navbar() {
     </nav>
   );
 }
-"y"

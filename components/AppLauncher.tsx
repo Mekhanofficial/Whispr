@@ -19,30 +19,17 @@ export default function AppLauncher() {
     message: "",
     type: "success",
   });
-  useEffect(() => {
-    const stored = localStorage.getItem("vault_apps");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setApps(parsed);
-        showNotification("Apps loaded from local storage", "info");
 
-        // If no apps, add some samples
-        if (parsed.length === 0) {
-          addSampleApps();
-        }
-      } catch (error) {
-        console.error("Failed to parse stored apps:", error);
-        setApps([]);
-        addSampleApps();
-      }
-    } else {
-      // If nothing in localStorage, add samples
-      setApps([]);
-      addSampleApps();
-    }
-  }, []);
-  
+  const showNotification = (
+    message: string,
+    type: "success" | "error" | "info"
+  ) => {
+    setNotification({ show: true, message, type });
+    setTimeout(
+      () => setNotification((prev) => ({ ...prev, show: false })),
+      3000
+    );
+  };
 
   const addSampleApps = () => {
     const sampleApps = [
@@ -54,10 +41,27 @@ export default function AppLauncher() {
     localStorage.setItem("vault_apps", JSON.stringify(sampleApps));
   };
 
-  const showNotification = (message: string, type: "success" | "error" | "info") => {
-    setNotification({ show: true, message, type });
-    setTimeout(() => setNotification({ ...notification, show: false }), 3000);
-  };
+  useEffect(() => {
+    const stored = localStorage.getItem("vault_apps");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setApps(parsed);
+        showNotification("Apps loaded from local storage", "info");
+
+        if (parsed.length === 0) {
+          addSampleApps();
+        }
+      } catch (error) {
+        console.error("Failed to parse stored apps:", error);
+        setApps([]);
+        addSampleApps();
+      }
+    } else {
+      setApps([]);
+      addSampleApps();
+    }
+  }, []);
 
   const addApp = () => {
     if (!name || !url) {
@@ -105,7 +109,6 @@ export default function AppLauncher() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8">
-      {/* Notification */}
       {notification.show && (
         <div
           className={`fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
@@ -122,12 +125,13 @@ export default function AppLauncher() {
 
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-teal-400">App Launcher</h1>
-        
-        {/* Add App Form */}
+
         <div className="bg-slate-800/50 p-4 rounded-lg mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm text-slate-400 mb-1">App Name</label>
+              <label className="block text-sm text-slate-400 mb-1">
+                App Name
+              </label>
               <input
                 type="text"
                 placeholder="e.g. Google"
@@ -138,7 +142,9 @@ export default function AppLauncher() {
               />
             </div>
             <div>
-              <label className="block text-sm text-slate-400 mb-1">App URL</label>
+              <label className="block text-sm text-slate-400 mb-1">
+                App URL
+              </label>
               <input
                 type="url"
                 placeholder="https://example.com"
@@ -161,7 +167,6 @@ export default function AppLauncher() {
           </div>
         </div>
 
-        {/* Apps Grid */}
         {apps.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-slate-500 mb-4">
@@ -195,7 +200,9 @@ export default function AppLauncher() {
                     {getIconForApp(app.name)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-white truncate">{app.name}</h3>
+                    <h3 className="font-medium text-white truncate">
+                      {app.name}
+                    </h3>
                     <p className="text-sm text-slate-400 truncate">{app.url}</p>
                   </div>
                 </div>
